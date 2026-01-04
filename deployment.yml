@@ -15,8 +15,9 @@ spec:
     spec:
       containers:
        - name: app
-         image: edu123/devopsimage:4
-        
+         image: faizreza/myappimage02
+        # image: faizreza/myappimage02:latest # same as above
+        # https://hub.docker.com/repository/docker/faizreza/myappimage02/general : dockerhub reference
 ---
 kind: Service
 apiVersion: v1
