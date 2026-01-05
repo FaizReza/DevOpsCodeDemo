@@ -1,5 +1,5 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: kubeserve
 spec:
@@ -9,40 +9,23 @@ spec:
       app: kubeserve
   template:
     metadata:
-      name: kubeserve
       labels:
         app: kubeserve
     spec:
       containers:
-       - name: app
-         image: faizreza/myappimage01
-        # image: faizreza/myappimage02:latest # same as above
-        # https://hub.docker.com/repository/docker/faizreza/myappimage02/general : dockerhub reference
+      - name: app
+        image: faizreza/myappimage01
         ports:
-          - containerPort: 8080  # Tomcat runs on 8080
-         # Add health checks
-         livenessProbe:
-           httpGet:
-             path: /addressbook/  # Your app path
-             port: 8080
-           initialDelaySeconds: 90  # Tomcat takes time to start
-           periodSeconds: 10
-         readinessProbe:
-           httpGet:
-             path: /addressbook/
-             port: 8080
-           initialDelaySeconds: 60
-           periodSeconds: 5
+        - containerPort: 8080
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-   name: kubeserve-svc
+  name: kubeserve-svc
 spec:
-  # type: NodePort
   type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 80
-  selector: 
+  selector:
     app: kubeserve
+  ports:
+  - port: 80
+    targetPort: 8080
