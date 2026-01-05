@@ -23,7 +23,7 @@ kind: Service
 metadata:
   name: kubeserve-svc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: kubeserve
   ports:
