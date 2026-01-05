@@ -18,6 +18,20 @@ spec:
          image: faizreza/myappimage01
         # image: faizreza/myappimage02:latest # same as above
         # https://hub.docker.com/repository/docker/faizreza/myappimage02/general : dockerhub reference
+          - containerPort: 8080  # Tomcat runs on 8080
+         # Add health checks
+         livenessProbe:
+           httpGet:
+             path: /addressbook/  # Your app path
+             port: 8080
+           initialDelaySeconds: 90  # Tomcat takes time to start
+           periodSeconds: 10
+         readinessProbe:
+           httpGet:
+             path: /addressbook/
+             port: 8080
+           initialDelaySeconds: 60
+           periodSeconds: 5
 ---
 kind: Service
 apiVersion: v1
