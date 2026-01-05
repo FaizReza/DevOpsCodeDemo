@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
        - name: app
-         image: faizreza/myappimage02
+         image: faizreza/myappimage01
         # image: faizreza/myappimage02:latest # same as above
         # https://hub.docker.com/repository/docker/faizreza/myappimage02/general : dockerhub reference
 ---
